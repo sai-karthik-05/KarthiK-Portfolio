@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KarthiK | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --bg-card: #f3f5fa;
+      --gray-light: #e0e3ec;
+      --border: #c4c7d7;
+      --text-main: #20242c;
+      --text-muted: #5c647a;
+      --accent: #4e97e9;
+      --accent-bg: #eaf3fd;
+      --shadow: 0 8px 32px rgba(44,62,80,0.08), 0 1.5px 6px rgba(44,62,80,.02);
+    }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg-main);
+      font-family: 'Roboto', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      width: 100vw;
+      scroll-behavior: smooth;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    #container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-main);
+    }
+    header {
+      background: var(--accent-bg);
+      color: var(--text-main);
+      padding: 3rem 1rem 3rem 1rem;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+      box-shadow: var(--shadow);
+      user-select: none;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.7rem;
+      color: var(--accent);
+    }
+    header p {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    nav {
+      background: var(--bg-card);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--gray-light);
+      user-select: none;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 1.4rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: color 0.18s;
+      opacity: 0.95;
+      position: relative;
+    }
+    nav a:after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--text-main);
+    }
+    nav a:hover:after, nav a:focus:after {
+      width: 100%;
+    }
+    main {
+      width: 100vw;
+      max-width: 1800px;
+      margin: 3rem auto 4rem auto;
+      padding: 0 2.5vw;
+      flex: 1;
+      min-width: 360px;
+      box-sizing: border-box;
+    }
+    /* ABOUT FLEX: image left, text right */
+    .about-flex {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2.2rem;
+    }
+    .profile-pic {
+      width: 260px; max-width: 100%; height: auto;
+      object-fit: cover;
+      border: 5px solid var(--accent);
+      background: var(--gray-light);
+      box-shadow: 0 8px 24px #c0d8ffaa;
+      flex-shrink: 0;
+      margin-bottom: 0;
+      margin-top: 0;
+      display: block;
+    }
+    .about-info {
+      flex: 1;
+    }
+    .about-info h2, .skills h2, .card h2:not(.skills h2):not(.about-info h2) {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0 0 0.5rem 0;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: .45rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .about-info p {
+      color: var(--text-muted);
+      font-size: 1.10rem;
+      margin: 0.7rem 0 0 0;
+      line-height: 1.7;
+    }
+    /* Skills grid in its own card */
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem 1.2rem;
+      list-style: none;
+      padding: 0; margin: 0.9rem 0 0 0;
+    }
+    .skills-list li {
+      background: var(--accent-bg);
+      color: var(--text-main);
+      border: 1.5px solid var(--accent);
+      border-radius: 7px;
+      padding: .48rem 1.2rem;
+      font-size: 1.02rem;
+      font-weight: 500;
+      box-shadow: 0 1px 5px #d5e6f755;
+      text-align: center;
+      transition: background 0.2s, color 0.2s, transform .14s;
+      cursor: default;
+    }
+    .skills-list li:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.04);
+    }
+    @media (max-width: 1050px) {
+      .skills-list { grid-template-columns: repeat(3, 1fr);}
+    }
+    @media (max-width: 700px) {
+      .about-flex { flex-direction: column; align-items: center; gap: 1.1rem; }
+      .profile-pic { width: 90px;}
+      .skills-list { grid-template-columns: repeat(2, 1fr);}
+    }
+    /* CARDS */
+    .card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 3rem;
+      padding: 2.2rem 2rem 2.2rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: box-shadow 0.23s, transform 0.23s, opacity 0.7s, background 0.23s;
+      min-width: 200px;
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      box-shadow: 0 10px 48px #8ab7ec33, 0 4px 18px #3f76ba22;
+      background: var(--accent-bg);
+      transform: translateY(-8px) scale(1.01);
+    }
+    .card p, .card strong {
+      color: var(--text-muted);
+    }
+    .card a {
+      color: var(--accent);
+      text-decoration: underline;
+      transition: color 0.23s;
+    }
+    .card a:hover, .card a:focus {
+      color: var(--text-main);
+    }
+    /* Certificates Grid */
+    .cert-grid {
+      display: grid;
+      gap: 1.5rem 1.7rem;
+      margin-top: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .cert-card {
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 3px 12px #c7d6e733;
+      border: 1.5px solid var(--gray-light);
+      padding: 1rem 1rem 1.1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+      transition: box-shadow 0.22s, border-color 0.22s, transform 0.16s;
+      cursor: pointer;
+    }
+    .cert-card:hover, .cert-card:focus-within {
+      box-shadow: 0 8px 28px #8ab7ec44, 0 3px 15px #abe8ff22;
+      border-color: var(--accent);
+      transform: translateY(-5px) scale(1.03);
+      background: var(--accent-bg);
+    }
+    .cert-title {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.22rem;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+    .cert-meta {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 0.08rem;
+    }
+    @media (max-width: 1100px) {
+      .cert-grid { grid-template-columns: repeat(2, 1fr);}
+    }
+    @media (max-width: 700px) {
+      .cert-grid { grid-template-columns: 1fr; }
+    }
+    /* Reveal animation */
+    @keyframes slideInDown {
+      0%   { transform: translateY(-70px); opacity: 0;}
+      100% { transform: translateY( 0px); opacity: 1;}
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Footer */
+    footer {
+      width: 100vw;
+      min-width: 100vw;
+      box-sizing: border-box;
+      text-align: center;
+      padding: 1.5rem 0 1rem 0;
+      color: #4e97e9;
+      background: var(--accent-bg);
+      letter-spacing: 1px;
+      font-size: 0.97rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Venkata Sai Karthik Mulleti</h1>
+      <p>Student</p>
+    </header>
+    <nav>
+      <a href="#about" tabindex="1">About Me</a>
+      <a href="#skills" tabindex="2">Skills</a>
+      <a href="#education" tabindex="3">Education</a>
+      <a href="#work" tabindex="4">Projects</a>
+      <a href="#certifications" tabindex="5">Certifications</a>
+      <a href="#contact" tabindex="6">Contact</a>
+    </nav>
+    <main>
+      <!-- ABOUT SECTION -->
+      <section id="about" class="card reveal-on-scroll" tabindex="7">
+        <div class="about-flex">
+          <img src="pic/KarthiK.jpg" alt="Profile picture" class="profile-pic" />
+          <div class="about-info">
+            <h2>About Me</h2>
+            <p>
+              Hello! I'm KarthiK, a bachelor of computer application student, I am ready to start my professional journey in a challenging 
+environment where I can grow my skills in programming or cloud technologies. I am seeking a role that 
+allows me to contribute my knowledge of software development and Microsoft Azure services, while 
+continuously learning and evolving into a proficient cloud engineer or full-stack developer.            </p>
+          </div>
+        </div>
+      </section>
+      <!-- SKILLS SECTION -->
+      <section id="skills" class="card reveal-on-scroll" tabindex="8">
+        <div class="skills">
+          <h2>Skills</h2>
+          <ul class="skills-list">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>C basics</li>
+            <li>Azure Fundamentals</li>
+          </ul>
+        </div>
+      </section>
+      <!-- EDUCATION SECTION  -->
+      <section id="education" class="card reveal-on-scroll" tabindex="9">
+        <h2>Education</h2>
+        <div style="margin-top:1.3rem;">
+          <div style="margin-bottom:1.1rem;">
+            <strong style="color:#4e97e9;font-size:1.07rem;">Bachelors in Computer Applications</strong><br>
+            <span style="color:#5c647a;">Aditya Degree College, Eluru</span><br>
+            <span style="color:#5c647a;">2023 – 2026</span>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <strong style="color:#4e97e9;font-size:1.07rem;">Intermediate (BIPC)</strong><br>
+            <span style="color:#5c647a;">NRI Junior College, Eluru</span><br>
+            <span style="color:#5c647a;">2021 – 2023</span>
+          </div>
+          <div>
+            <strong style="color:#4e97e9;font-size:1.07rem;">SSC</strong><br>
+            <span style="color:#5c647a;">Sri Surya E.M High School, Eluru</span><br>
+            <span style="color:#5c647a;">2021</span>
+          </div>
+        </div>
+      </section>
+<!-- EXPERIENCE SECTION -->
+<section id="experience" class="card reveal-on-scroll" tabindex="10">
+  <h2>Experience</h2>
+  <div style="margin-top:1.3rem;">
+    <div>
+      <strong style="color:#4e97e9;font-size:1.07rem;">Azure Cloud Intern</strong><br>
+      <span style="color:#5c647a;">TENCON INFRA</span><br>
+      <span style="color:#5c647a;">April 2025 – June 2025</span><br>
+      <span style="color:#5c647a;">
+        - Deployed virtual manchines using Azure portal.<br>
+        - Learned how to create  and upload files in azure blob storage.<br>
+        - Collaborated with TENCON INFRA team to understand the cloud Architecture.
+      </span>
+    </div>
+  </div>
+</section>
+
+      <!-- PROJECTS -->
+      <section id="work" class="card reveal-on-scroll" tabindex="10">
+        <h2>Projects</h2>
+        <p>
+          <strong>Classic Portfolio:</strong><br />
+          Clean, modern structure with inviting transitions.<br /><br />
+          <strong>Animated Landing Page:</strong><br />
+          Sophisticated interactive and sliding effects for high engagement.<br /><br />
+          <strong>Dashboard UI:</strong><br />
+          Responsive components and subtle micro-interactions.
+        </p>
+      </section>
+     <!-- CERTIFICATIONS -->
+<section id="certifications" class="card reveal-on-scroll" tabindex="11">
+  <h2>Certifications</h2>
+  <div class="cert-grid" id="cert-grid">
+    <div class="cert-card">
+      <a href="certific/KarthiK.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        Mepro Pearson Certificate
+      </a>
+      <span class="cert-meta">Mepro — Oct 2023</span>
+    </div>
+    <div class="cert-card">
+      <a href="certific/pe1.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        Python Essentials 1
+      </a>
+      <span class="cert-meta">Cisco — Jun 2025</span>
+    </div>
+    <div class="cert-card">
+      <a href="certific/pe2.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        Python Essentials 2
+      </a>
+      <span class="cert-meta">Cisco — Jun 2025</span>
+    </div>
+    <div class="cert-card">
+      <a href="certific/myazure.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        Azure Fundamentals
+      </a>
+      <span class="cert-meta">Microsoft — July 2025</span>
+    </div>
+    <!-- NEW CERTIFICATIONS -->
+    <div class="cert-card">
+      <a href="https://link-to-your-cert1.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        JavaScript Advanced Certificate
+      </a>
+      <span class="cert-meta">Udemy — Aug 2025</span>
+    </div>
+    <div class="cert-card">
+      <a href="https://link-to-your-cert2.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        Database Management Foundations
+      </a>
+      <span class="cert-meta">Oracle Academy — Sept 2025</span>
+    </div>
+    <div class="cert-card">
+      <a href="https://link-to-your-cert3.pdf" target="_blank" class="cert-title" rel="noopener noreferrer">
+        Web Development Bootcamp
+      </a>
+      <span class="cert-meta">Coursera — Sept 2025</span>
+    </div>
+  </div>
+</section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="card reveal-on-scroll" tabindex="12">
+        <h2>Contact</h2>
+        <p>
+          Email: <a href="mailto:karthikmulleti05@gmail.com">karthikmulleti05@gmail.com</a><br />
+          LinkedIn: <a href="https://linkedin.com/in/YOUR-REAL-USERNAME" target="_blank">linkedin.com/in/YOUR-REAL-USERNAME</a><br />
+          GitHub: <a href="https://github.com/sai-karthik-05" target="_blank">github.com/sai-karthik-05</a>
+        </p>
+      </section>
+    </main>
+    <footer>
+      Thank you
+    </footer>
+  </div>
+  <script>
+    // Scroll reveal animation
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
+
